@@ -1,0 +1,99 @@
+# Python虛擬環境
+venv/
+env/
+ENV/
+.venv/
+.env/
+.ENV/
+
+# Python快取文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 環境變數文件 - 敏感信息
+.env
+*.env
+.env.*
+!.env.example
+
+# 日誌文件
+*.log
+logs/
+log/
+
+# IDE相關文件
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+.project
+.pydevproject
+.settings/
+
+# 系統文件
+.DS_Store
+Thumbs.db
+.directory
+desktop.ini
+
+# LINE Bot 特定文件
+line_token.txt
+line_secret.txt
+openai_key.txt
+
+# 臨時文件
+tmp/
+temp/
+.tmp/
+.temp/
+
+# 測試相關
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+nosetests.xml
+.coverage.*
+
+# 分析工具
+.prof
+profile_default/
+ipython_config.py
+
+# 文檔生成
+docs/_build/
+docs/site/
+
+# 數據庫
+*.sqlite3
+*.db
+
+# 部署相關
+.vercel
+.netlify
+.deployment
+.gcloudignore 
