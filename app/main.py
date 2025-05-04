@@ -189,24 +189,4 @@ async def root():
 # 被裝飾的處理函數（@handler.add，@handler.default）也是由handler.handle同步調用的。
 # 因此，handle_message中的LINE和OpenAI API調用使用的是它們的同步客戶端。
 # 對於非常高的吞吐量，你可能需要探索替代的webhook解析或
-# 將API調用分派到後台任務（例如，使用FastAPI的run_in_threadpool或外部隊列）。
-
-# 若直接運行此文件，將啟動uvicorn服務器
-if __name__ == "__main__":
-    # 啟動 uvicorn 服務器，用於運行 FastAPI 應用
-    import pathlib
-    import sys
-    
-    # 獲取當前文件的絕對路徑
-    current_file = pathlib.Path(__file__).absolute()
-    # 將父目錄添加到 sys.path
-    parent_dir = current_file.parent.parent
-    sys.path.append(str(parent_dir))
-    
-    # 啟動服務器，注意模塊路徑
-    uvicorn.run(
-        "app.main:app", 
-        host="0.0.0.0",  # 監聽所有網絡接口
-        port=8000,       # 在端口 8000 上運行
-        reload=True      # 在開發模式中啟用重新加載功能
-    ) 
+# 將API調用分派到後台任務（例如，使用FastAPI的run_in_threadpool或外部隊列）。 
