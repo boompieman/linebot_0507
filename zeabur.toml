@@ -3,8 +3,9 @@ builder = "python"
 buildCommand = "pip install -r requirements.txt"
 
 [deploy]
-startCommand = "gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app -b 0.0.0.0:8000"
+startCommand = "gunicorn -w 1 -k uvicorn.workers.UvicornWorker app.main:app -b 0.0.0.0:$PORT"
 healthCheckPath = "/"
 
-[http]
-port = 8000 
+# [http] 部分可以移除或註釋掉，讓 Zeabur 自動檢測端口
+# [http]
+# port = 8000 
