@@ -27,7 +27,7 @@
 2. 建立虛擬環境
    ```bash
    python3 -m venv venv
-   source venv/bin/activate  # 在Windows上使用: .\venv\Scripts\activate
+   source venv/bin/activate  # 在Windows上使用: .\\venv\\Scripts\\activate
    ```
 
 3. 安裝依賴
@@ -36,30 +36,95 @@
    ```
 
 4. 配置環境變數
-   - 複製`.env.example`為`.env`
-   - 填入你的LINE Channel Secret、Channel Access Token和OpenAI API Key
+   - 建立`.env`文件，添加以下內容：
+     ```
+     # LINE Bot 配置
+     LINE_CHANNEL_SECRET=your_line_channel_secret
+     LINE_CHANNEL_ACCESS_TOKEN=your_line_channel_access_token
+     
+     # OpenAI 配置
+     OPENAI_API_KEY=your_openai_api_key
+     
+     # 應用配置 
+     DEBUG=false
+     ```
+   - 將各項替換為實際的值
 
 ### 運行應用
 
 ```bash
-cd app
-python run.py
+python app/main.py
 ```
 
 應用將在 http://localhost:8000 上運行。
 
-## 部署指南
+## Docker 部署
 
-1. 在你選擇的雲平台上部署應用
-2. 確保設置環境變數
-3. 在LINE Developer Console中更新Webhook URL為你的部署URL + `/callback`
-4. 啟用Webhook功能
+本項目支持使用Docker進行部署，這種方式更加簡便且易於在不同環境中運行。
+
+### 使用Docker部署
+
+1. 構建Docker鏡像
+   ```bash
+   docker build -t linebot .
+   ```
+
+2. 運行Docker容器
+   ```bash
+   docker run -p 8000:8000 --env-file .env linebot
+   ```
+
+### 使用Docker Compose部署
+
+1. 確保已安裝Docker和Docker Compose
+
+2. 運行容器
+   ```bash
+   docker-compose up -d
+   ```
+
+3. 查看日誌
+   ```bash
+   docker-compose logs -f
+   ```
+
+## 雲平台部署
+
+### Zeabur部署
+
+Zeabur提供了簡單便捷的部署方式：
+
+1. 註冊並登錄[Zeabur](https://zeabur.com)
+2. 創建一個新項目
+3. 將代碼部署到GitHub
+4. 在Zeabur中選擇"從GitHub導入"
+5. 選擇您的倉庫
+6. 設置環境變數：
+   - `LINE_CHANNEL_SECRET`: LINE頻道密鑰
+   - `LINE_CHANNEL_ACCESS_TOKEN`: LINE頻道訪問令牌
+   - `OPENAI_API_KEY`: OpenAI API金鑰
+7. 部署完成後，獲取分配的URL
+8. 在LINE Developer Console設置Webhook URL為`您的域名/callback`
+
+#### Zeabur部署疑難排解
+
+如果在Zeabur部署中遇到`python: can't open file '/app/main.py'`錯誤：
+
+1. 確保Dockerfile中的CMD命令正確指向主應用文件：
+   ```
+   CMD ["python", "app/main.py"]
+   ```
+
+2. 您也可以在Zeabur的服務設置中修改啟動命令為：
+   ```
+   python app/main.py
+   ```
 
 ## 注意事項
 
 - 此應用使用OpenAI API，可能產生費用
 - 確保LINE Bot的Webhook URL使用HTTPS
-- 在生產環境中不要使用`reload=True`
+- 在生產環境中不要使用調試模式
 
 ## 授權條款
 
