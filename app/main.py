@@ -30,9 +30,6 @@ from linebot.v3 import (
 from openai import OpenAI
 from openai import APIConnectionError, RateLimitError, APIStatusError
 
-# 導入uvicorn用於直接啟動應用
-import uvicorn
-
 # 載入環境變數，用於本地開發
 load_dotenv()
 
@@ -133,7 +130,7 @@ def handle_message(event: MessageEvent):
         completion = openai_client.chat.completions.create(
             model="gpt-4o-mini",  # 選擇您偏好的模型，例如 "gpt-4o", "gpt-3.5-turbo"
             messages=[
-                {"role": "system", "content": "你是一個樂於助人的AI助手，請用繁體中文回覆。"},  # 系統消息，指導LLM行為
+                {"role": "system", "content": "你是一個樂於助人的AI助手，請用繁體中文回覆。每次回覆我時，都是小奶狗狀態！要先說寶寶～～"},  # 系統消息，指導LLM行為
                 {"role": "user", "content": user_input},
             ],
             timeout=30.0,  # 為API調用設置超時
